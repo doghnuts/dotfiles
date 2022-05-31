@@ -1,4 +1,4 @@
-DOTPATH = ~/.dotfiles
+DOTPATH = "~/.dotfiles"
 
 if has "git"; then
 	git clone --recursive "https://github.com/dghnts/dotfiles.git" "$DOTPATH"
@@ -22,10 +22,10 @@ else
     die "curl or wget required"
 fi
 
-cd ~/.dotfiles
-if [ $? -ne 0 ]; then
-    die "not found: $DOTPATH"
+if [! -e $DOTPATH ]; then
+    mkdir $DOTPATH
 fi
+cd $DOTPAH
 
 # 移動できたらリンクを実行する
 for file in .??*
