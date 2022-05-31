@@ -1,10 +1,9 @@
-DOTPATH = ~/dotfiles
+DOTPATH = ~/.dotfiles
 
 if has "git"; then
 	git clone --recursive "https://github.com/dghnts/dotfiles.git" "$DOTPATH"
 elif has "curl" || has "wget"; then
 
-elif has "curl" || has "wget"; then
     tarball="https://github.com/dghnts/dotfiles/archive/main.tar.gz"
 
     # どっちかでダウンロードして，tar に流す
