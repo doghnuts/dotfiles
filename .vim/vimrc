@@ -1,0 +1,59 @@
+source $VIMRUNTIME/defaults.vim
+
+set encoding=utf-8
+set hidden
+set number
+set cursorline
+set clipboard+=unnamed
+set t_Co=256
+
+set nobackup
+set nowritebackup
+
+set cmdheight=2
+
+let mapleader = "\<Space>"
+
+inoremap jj <ESC>
+nnoremap <Leader>w :w<CR>
+
+
+call jetpack#begin()
+Jetpack 'https://github.com/dense-analysis/ale'
+Jetpack 'junegunn/fzf.vim'
+Jetpack 'junegunn/fzf', { 'do': {-> fzf#install()} }
+Jetpack 'tpope/vim-fireplace', { 'for': 'clojure' }
+Jetpack 'lervag/vimtex' 
+Jetpack 'vim-airline/vim-airline'
+Jetpack 'vim-airline/vim-airline-themes'
+Jetpack 'neoclide/coc.nvim', {'branch': 'release'}
+call jetpack#end()
+
+
+let g:vimtex_compiler_latexmk = {
+      \ 'background': 1,
+      \ 'build_dir': {-> expand("%:t:r")},
+      \ 'continuous': 1,
+      \ 'options': [
+      \    '-pdfdvi',
+      \    '-verbose',
+      \    '-file-line-error',
+      \    '-synctex=1',
+      \    '-interaction=nonstopmode',
+      \ ],
+      \}
+
+let g:airline_powerline_fonts=1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#buffer_idx_mode = 1
+let g:airline_mode_map = {
+	\ 'n'  : 'Normal',
+	\ 'i'  : 'Insert',
+	\ 'R'  : 'Replace',
+	\ 'c'  : 'Command',
+	\ 'v'  : 'Visual',
+	\ 'V'  : 'V-Line',
+	\ '⌃V' : 'V-Block',
+	\ }
+
+let g:airline_theme = 'luna'
