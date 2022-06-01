@@ -1,8 +1,11 @@
-DOTPATH = "~/.dotfiles"
+if [ ! -e ~/dotfiles ]; then
+	mkdir ~/dotfiles
 
-if has "git"; then
+DOTPAH="dotfiles"
+
+if type git > /dev/null 2>&1; then
 	git clone --recursive "https://github.com/dghnts/dotfiles.git" "$DOTPATH"
-elif type curl > /dev/bull 2>&1 || type wget > /dev/null 2>&1; then
+elif type curl > /dev/null 2>&1 || type wget > /dev/null 2>&1; then
 
     tarball="https://github.com/dghnts/dotfiles/archive/main.tar.gz"
 
@@ -12,20 +15,17 @@ elif type curl > /dev/bull 2>&1 || type wget > /dev/null 2>&1; then
 
     elif type wget > /dev/null/ 2>&1; then
         wget -O - "$tarball"
-
+	
     fi | tar zxv
 
     # 解凍したら，DOTPATH に置く
-    mv -f dotfiles-main "$DOTPATH"
+    mv dotfiles-main $DOTPATH
 
 else
     exit "curl or wget required"
 fi
 
-if [! -e $DOTPATH ]; then
-    mkdir $DOTPATH
-fi
-cd $DOTPAH
+cd "$HOME"/$DOTPAH
 
 # 移動できたらリンクを実行する
 for file in .??*
