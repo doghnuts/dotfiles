@@ -1,8 +1,8 @@
 if [ ! -e ~/dotfiles ]; then
 	mkdir ~/dotfiles
-
-DOTPAH="dotfiles"
 fi
+
+DOTPATH="dotfiles"
 
 if type git > /dev/null 2>&1; then
 	git clone --recursive "https://github.com/dghnts/dotfiles.git" "$DOTPATH"
@@ -26,10 +26,10 @@ else
     exit "curl or wget required"
 fi
 
-cd "$HOME"/"$DOTPAH"
+cd $HOME/$DOTPATH
 
 # 移動できたらリンクを実行する
-for file in .??*
+for file in .*
 do 
 	["$file" = ".git"] && continue
 	
