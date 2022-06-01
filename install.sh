@@ -26,7 +26,7 @@ else
     exit "curl or wget required"
 fi
 
-cd "$HOME"/$DOTPAH
+cd "$HOME"/"$DOTPAH"
 
 # 移動できたらリンクを実行する
 for file in .??*
