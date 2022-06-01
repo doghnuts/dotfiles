@@ -2,6 +2,7 @@ if [ ! -e ~/dotfiles ]; then
 	mkdir ~/dotfiles
 
 DOTPAH="dotfiles"
+fi
 
 if type git > /dev/null 2>&1; then
 	git clone --recursive "https://github.com/dghnts/dotfiles.git" "$DOTPATH"
