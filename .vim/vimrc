@@ -3,9 +3,11 @@ source $VIMRUNTIME/defaults.vim
 set encoding=utf-8
 set hidden
 set number
-set clipboard+=unnamedplus
+set clipboard=unnamedplus
 set t_Co=256
 set foldmethod=marker
+
+colorscheme elflord
 
 set cursorline
 hi clear CursorLine
@@ -21,7 +23,7 @@ inoremap jj <ESC>
 nnoremap <Leader>w :w<CR>
 
 "" plugin
-" {{{
+" {{{za
 call jetpack#begin()
 Jetpack 'https://github.com/dense-analysis/ale'
 Jetpack 'junegunn/fzf.vim'
@@ -30,7 +32,14 @@ Jetpack 'lervag/vimtex'
 Jetpack 'vim-airline/vim-airline'
 Jetpack 'vim-airline/vim-airline-themes'
 Jetpack 'vim-denops/denops.vim'
-Jetpack 'vim-denops/denops-helloworld.vim'
+Jetpack 'vim-skk/skkeleton'
+Jetpack 'Shougo/ddc.vim'
+Jetpack 'Shougo/ddc-around'
+Jetpack 'Shougo/ddc-matcher_head'
+Jetpack 'Shougo/ddc-sorter_rank'
+Jetpack 'prabirshrestha/vim-lsp'
+Jetpack 'mattn/vim-lsp-settings'
+Jetpack 'shun/ddc-vim-lsp'
 Jetpack 'mattn/emmet-vim'
 call jetpack#end()
 " }}}
@@ -68,32 +77,35 @@ let g:airline_mode_map = {
 let g:airline_theme = 'luna'
 " }}}
 
-"" settins of eskk
+"" settins of skkeleton
 " {{{
-let g:eskk#directory = "~/.config/eskk"
-let g:eskk#dictionary = { 'path': "~/.config/eskk/my_jisyo", 'sorted': 1, 'encoding': 'utf-8', }
-let g:eskk#large_dictionary = {'path': "~/.config/eskk/SKK-JISYO.L", 'sorted': 1, 'encoding': 'euc-jp',}
+call skkeleton#config({ 'globalJisyo': '~/.skk/SKK-JISYO.L' })
 
-let g:eskk#kakutei_when_unique_candidate = 1 "漢字変換した時に候補が1つの場合、自動的に確定する
-let g:eskk#enable_completion = 0             "neocompleteを入れないと、1にすると動作しなくなるため0推奨
-let g:eskk#no_default_mappings = 1           "デフォルトのマッピングを削除
-let g:eskk#keep_state = 0                    "ノーマルモードに戻るとeskkモードを初期値にする
-let g:eskk#egg_like_newline = 1              "漢字変換を確定しても改行しない。
+imap jk <Plug>(skkeleton-enable)
+cmap jk <Plug>(skkeleton-enable)
 
-"表示文字を変更(オレ サンカクデ ハンダン デキナイ)
-let g:eskk#marker_henkan = "[変換]"
-let g:eskk#marker_henkan_select = "[選択]"
-let g:eskk#marker_okuri = "[送り]"
-let g:eskk#marker_jisyo_touroku = "[辞書]" 
-
-augroup vimrc_eskk
-  autocmd!
-  autocmd User eskk-enable-post lmap <buffer> l <Plug>(eskk:disable)
-augroup END
-
-imap jk <Plug>(eskk:toggle)
-cmap jk <Plug>(eskk:toggle)
-
-inoremap <silent><expr> ;; pumvisible() ? coc#_select_confirm() : coc#refresh()
-
+imap <C-j> <Plug>(skkeleton-disable)
+cmap <C-j> <Plug>(skkeleton-disable)
 " }}}
+
+"" settings of ddc
+"" {{{
+call ddc#custom#patch_global('sources', ['skkeleton','vim-lsp','around'])
+call ddc#custom#patch_global('sourceOptions', {
+			\ '_': {
+			\	'matchers': ['matcher_head'],
+			\	'sorters': ['sorter_rank']
+			\ },
+			\ 'skkeleton': {
+				\ 'mark': 'skkeleton',
+				\ 'matchers': ['skkeleton'],
+				\ 'sorters': [],
+				\ 'minAutoCompleteLength': 2,
+				\ },
+			\ 'vim-lsp': {
+			\	'mark': 'vim-lsp',
+			\	'matchers': ['matcher_head']
+			\ }
+			\})
+call ddc#enable()
+"" }}}

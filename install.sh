@@ -28,7 +28,6 @@ fi
 
 cd "$DOTPATH"
 
-echo $PWD
 # 移動できたらリンクを実行する
 for file in .*
 do 
@@ -36,6 +35,9 @@ do
 		continue
 	else
 		echo $file
-	ln -snvf "$DOTPATH/$file" "$HOME"/"$file" 
+		if [ "$file" = ".vim" ]; then
+			rm -rf $file/pack/jetpack
+		fi
+		ln -snvf "$DOTPATH/$file" "$HOME"/"$file" 
 	fi
 done
