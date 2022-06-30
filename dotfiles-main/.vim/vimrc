@@ -3,7 +3,7 @@ source $VIMRUNTIME/defaults.vim
 set encoding=utf-8
 set hidden
 set number
-set clipboard+=unnamedplus
+set clipboard+=unnamed
 set t_Co=256
 set foldmethod=marker
 
@@ -29,9 +29,9 @@ Jetpack 'junegunn/fzf', { 'do': {-> fzf#install()} }
 Jetpack 'lervag/vimtex' 
 Jetpack 'vim-airline/vim-airline'
 Jetpack 'vim-airline/vim-airline-themes'
-Jetpack 'vim-denops/denops.vim'
-Jetpack 'vim-denops/denops-helloworld.vim'
+Jetpack 'neoclide/coc.nvim', {'branch': 'release'}
 Jetpack 'mattn/emmet-vim'
+Jetpack 'tyru/eskk.vim'
 call jetpack#end()
 " }}}
 
