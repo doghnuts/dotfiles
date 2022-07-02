@@ -48,7 +48,7 @@ call jetpack#end()
 " {{{
 let g:vimtex_compiler_latexmk = {
       \ 'background': 1,
-      \ 'build_dir': {-> expand("%:t:r")},
+      \ 'build_dir': "../out",
       \ 'continuous': 1,
       \ 'options': [
       \    '-pdfdvi',
