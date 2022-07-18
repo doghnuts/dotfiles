@@ -41,6 +41,7 @@ Jetpack 'prabirshrestha/vim-lsp'
 Jetpack 'mattn/vim-lsp-settings'
 Jetpack 'shun/ddc-vim-lsp'
 Jetpack 'mattn/emmet-vim'
+Jetpack 'previm/previm'
 call jetpack#end()
 " }}}
 
@@ -58,6 +59,7 @@ let g:vimtex_compiler_latexmk = {
       \    '-interaction=nonstopmode',
       \ ],
       \}
+let g:vimtex_view_general_viewer = 'zathura'
 " }}}
 
 "" settings of vim-ariline
@@ -81,11 +83,9 @@ let g:airline_theme = 'luna'
 " {{{
 call skkeleton#config({ 'globalJisyo': '~/.skk/SKK-JISYO.L' })
 
-imap jk <Plug>(skkeleton-enable)
-cmap jk <Plug>(skkeleton-enable)
+inoremap <C-j> <Plug>(skkeleton-toggle)
+cnoremap <C-j> <Plug>(skkeleton-toggle)
 
-imap <C-j> <Plug>(skkeleton-disable)
-cmap <C-j> <Plug>(skkeleton-disable)
 " }}}
 
 "" settings of ddc
@@ -108,4 +108,11 @@ call ddc#custom#patch_global('sourceOptions', {
 			\ }
 			\})
 call ddc#enable()
+"" }}}
+
+"" settings of previm
+"" {{{
+let g:previm_open_cmd = '/mnt/c/Program\ Files\ \(x86\)/Microsoft/Edge/Application/msedge.exe'
+let g:previm_wsl_mode = 1
+let g:previm_enable_realtime = 0
 "" }}}
